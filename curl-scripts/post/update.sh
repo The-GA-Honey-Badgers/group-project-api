@@ -1,17 +1,17 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/comments"
+URL_PATH="/posts"
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}" \
   --include \
-  --request POST \
+  --request PATCH \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "comment": {
-      "body": "'"${BODY}"'",
-      "postId": "'"${POSTID}"'"
+    "post": {
+      "title": "'"${TITLE}"'",
+      "body": "'"${BODY}"'"
     }
   }'
 
