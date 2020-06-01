@@ -3,6 +3,7 @@
 // require in dependencies, Post model, middleware
 const express = require('express')
 const passport = require('passport')
+const mongoose = require('mongoose')
 const Post = require('../models/post')
 const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
@@ -15,6 +16,10 @@ const router = express.Router()
 // INDEX - GET /posts (we will not req a token)
 router.get('/posts', (req, res, next) => {
   Post.find()
+    .populate('owner', 'email', 'username')
+    .populate({ path: 'comments', select: 'author' })
+    .populate({ path: 'comments', select: 'body' })
+
     .then(posts => {
       return posts.map(post => post.toObject())
     })
@@ -25,6 +30,10 @@ router.get('/posts', (req, res, next) => {
 // SHOW - GET /posts/:id (we will not req a token)
 router.get('/posts/:id', (req, res, next) => {
   Post.findById(req.params.id)
+    .populate('owner', 'email', 'username')
+    .populate({ path: 'comments', select: 'author' })
+    .populate({ path: 'comments', select: 'body' })
+
     .then(handle404)
     .then(post => res.status(200).json({ post: post.toObject() }))
     .catch(next)
