@@ -1,12 +1,9 @@
 'use strict'
-
 // require in dependencies, Post model, middleware
 const express = require('express')
 const passport = require('passport')
-<<<<<<< HEAD
 const mongoose = require('mongoose')
-=======
->>>>>>> development
+
 const Post = require('../models/post')
 const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
@@ -19,17 +16,8 @@ const router = express.Router()
 // INDEX - GET /posts (we will not req a token)
 router.get('/posts', (req, res, next) => {
   Post.find()
-<<<<<<< HEAD
-    .populate('owner', 'email', 'username')
-    .populate({ path: 'comments', select: 'author' })
-    .populate({ path: 'comments', select: 'body' })
-=======
-  // work on populating later - see possible base below vv
-  // .populate('owner', 'email', 'username')
-  // .populate({ path: 'comments', select: 'author' })
-  // .populate({ path: 'comments', select: 'body' })
->>>>>>> development
-
+    .populate('owner', 'email username')
+    .populate({ path: 'comments', populate: 'author' })
     .then(posts => {
       return posts.map(post => post.toObject())
     })
@@ -40,17 +28,8 @@ router.get('/posts', (req, res, next) => {
 // SHOW - GET /posts/:id (we will not req a token)
 router.get('/posts/:id', (req, res, next) => {
   Post.findById(req.params.id)
-<<<<<<< HEAD
-    .populate('owner', 'email', 'username')
-    .populate({ path: 'comments', select: 'author' })
-    .populate({ path: 'comments', select: 'body' })
-=======
-  // work on populating later - see possible base below vv
-  // .populate('owner', 'email', 'username')
-  // .populate({ path: 'comments', select: 'author' })
-  // .populate({ path: 'comments', select: 'body' })
->>>>>>> development
-
+    .populate('owner', 'email username')
+    .populate({ path: 'comments', populate: 'author' })
     .then(handle404)
     .then(post => res.status(200).json({ post: post.toObject() }))
     .catch(next)
