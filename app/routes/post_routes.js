@@ -36,8 +36,8 @@ router.get('/posts/:id', (req, res, next) => {
 })
 
 // CREATE - POST /posts
-router.post('/posts', requireToken, (req, res, next) => {
-  req.body.post.owner = req.user.id
+router.post('/posts', (req, res, next) => {
+  // req.body.post.owner = req.user.id
 
   Post.create(req.body.post)
     .then(post => {
