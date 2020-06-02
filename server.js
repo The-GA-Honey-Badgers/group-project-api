@@ -12,6 +12,7 @@ const postRoutes = require('./app/routes/post_routes')
 const errorHandler = require('./lib/error_handler')
 const replaceToken = require('./lib/replace_token')
 const requestLogger = require('./lib/request_logger')
+const uploadRoutes = require('./app/routes/upload_routes')
 
 // require database configuration logic
 // `db` will be the actual Mongo URI as a string
@@ -65,7 +66,7 @@ app.use(requestLogger)
 app.use(commentRoutes)
 app.use(userRoutes)
 app.use(postRoutes)
-
+app.use(uploadRoutes)
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them
