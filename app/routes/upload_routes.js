@@ -10,13 +10,14 @@ const Upload = require('./../models/upload')
 const User = require('./../models/user')
 const requireToken = passport.authenticate('bearer', { session: false })
 const Post = require('./../models/post')
-//
-router.post('/uploads', (req, res, next) => {
-  url = req.body.websiteUrl
-  Upload.create({imageUrl: req.body.websiteUrl})
-  .then(upload => res.status(201).json({upload: upload.toObject()}))
-  .catch(next)
-})
+
+// Upload img by url - this feature may be removed.
+// router.post('/uploads', (req, res, next) => {
+//   url = req.body.websiteUrl
+//   Upload.create({imageUrl: req.body.websiteUrl})
+//   .then(upload => res.status(201).json({upload: upload.toObject()}))
+//   .catch(next)
+// })
 
 router.post('/localfileupload', upload.single('file'), (req, res, next) => {
   // req.body.author = req.user._id
