@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const commentSchema = new mongoose.Schema({
   body: {
     type: String,
+    maxlength: 200,
     required: true
   },
   author: {
@@ -21,6 +22,7 @@ const commentSchema = new mongoose.Schema({
     default: null
   }
 }, {
+  timestampes: true,
   toObject: {
     virtuals: true
   }
