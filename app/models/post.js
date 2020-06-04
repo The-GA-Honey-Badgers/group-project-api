@@ -3,10 +3,12 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema({
   title: {
     type: String,
+    maxlength: 50,
     required: true
   },
   body: {
     type: String,
+    maxlength: 400,
     required: true
   },
   imgUrl: {
@@ -19,6 +21,7 @@ const postSchema = new mongoose.Schema({
     required: true
   }
 }, {
+  timestamps: true,
   toObject: {
     virtuals: true
   }
