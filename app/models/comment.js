@@ -22,7 +22,7 @@ const commentSchema = new mongoose.Schema({
     default: null
   }
 }, {
-  timestampes: true,
+  timestamps: true,
   toObject: {
     virtuals: true
   }
